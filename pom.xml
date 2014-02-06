@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.theisenp.vicarious</groupId>
 	<artifactId>grateful-obama</artifactId>
-	<version>1.0.0-SNAPSHOT</version>
+	<version>1.0.0</version>
 
 	<properties>
 		<jdk.version>1.6</jdk.version>
