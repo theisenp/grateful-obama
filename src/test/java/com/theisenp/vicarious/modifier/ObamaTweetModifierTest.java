@@ -16,19 +16,96 @@ import twitter4j.User;
 public class ObamaTweetModifierTest {
 
 	// Constants
-	private static final String NAME = "Patrick Theisen";
-	private static final String PATTERN = "^.*#yourewelcomepatricktheisen$";
+	private static final String PATTERN = "^.*#YoureWelcome%s$";
 
 	@Test
-	public void testResponse() {
+	public void testResponseNameFirstOnly() {
+		String input = "Barack";
+		String expected = String.format(PATTERN, "Barack");
 		ObamaTweetModifier modifier = new ObamaTweetModifier();
 
 		User user = mock(User.class);
-		when(user.getName()).thenReturn(NAME);
+		when(user.getName()).thenReturn(input);
 
-		for(int i = 0; i < 10000; i++) {
-			String response = modifier.respond(user, "");
-			assertThat(response.matches(PATTERN)).isTrue();
-		}
+		String response = modifier.respond(user, "");
+		assertThat(response.matches(expected)).isTrue();
+	}
+
+	@Test
+	public void testResponseNameFirstAndLast() {
+		String input = "Barack Obama";
+		String expected = String.format(PATTERN, "Barack");
+		ObamaTweetModifier modifier = new ObamaTweetModifier();
+
+		User user = mock(User.class);
+		when(user.getName()).thenReturn(input);
+
+		String response = modifier.respond(user, "");
+		assertThat(response.matches(expected)).isTrue();
+	}
+
+	@Test
+	public void testResponseNameEmpty() {
+		String input = "";
+		String expected = String.format(PATTERN, "");
+		ObamaTweetModifier modifier = new ObamaTweetModifier();
+
+		User user = mock(User.class);
+		when(user.getName()).thenReturn(input);
+
+		String response = modifier.respond(user, "");
+		assertThat(response.matches(expected)).isTrue();
+	}
+
+	@Test
+	public void testResponseNameWhitespace() {
+		String input = "\t  ";
+		String expected = String.format(PATTERN, "");
+		ObamaTweetModifier modifier = new ObamaTweetModifier();
+
+		User user = mock(User.class);
+		when(user.getName()).thenReturn(input);
+
+		String response = modifier.respond(user, "");
+		assertThat(response.matches(expected)).isTrue();
+	}
+
+	@Test
+	public void testResponseNameBeginsWithWhitespace() {
+		String input = "\t Barack";
+		String expected = String.format(PATTERN, "Barack");
+		ObamaTweetModifier modifier = new ObamaTweetModifier();
+
+		User user = mock(User.class);
+		when(user.getName()).thenReturn(input);
+
+		String response = modifier.respond(user, "");
+		assertThat(response.matches(expected)).isTrue();
+	}
+	
+	@Test
+	public void testResponseNameLowercase() {
+		String input = "\t barack";
+		String expected = String.format(PATTERN, "Barack");
+		ObamaTweetModifier modifier = new ObamaTweetModifier();
+		
+		User user = mock(User.class);
+		when(user.getName()).thenReturn(input);
+		
+		String response = modifier.respond(user, "");
+		assertThat(response.matches(expected)).isTrue();
+	}
+	
+	@Test
+	public void testResponseNameUppercase() {
+		String input = "\t BARACK";
+		String expected = String.format(PATTERN, "BARACK");
+		ObamaTweetModifier modifier = new ObamaTweetModifier();
+		
+		User user = mock(User.class);
+		when(user.getName()).thenReturn(input);
+		
+		String response = modifier.respond(user, "");
+		assertThat(response.matches(expected)).isTrue();
 	}
 }

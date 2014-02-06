@@ -16,7 +16,7 @@ public class ObamaTweetModifier extends BaseTweetReplyModifier {
 
 	// Constant
 	private static final Random RANDOM = new Random();
-	private static final String PATTERN = "%s, %s! #yourewelcome%s";
+	private static final String PATTERN = "%s, %s! #YoureWelcome%s";
 	private static final List<String> OPENINGS = new ArrayList<String>();
 	private static final List<String> CLOSINGS = new ArrayList<String>();
 	static {
@@ -53,11 +53,35 @@ public class ObamaTweetModifier extends BaseTweetReplyModifier {
 		int closingIndex = RANDOM.nextInt(CLOSINGS.size());
 		String closing = CLOSINGS.get(closingIndex);
 
-		// Remove spaces and lowercase the user's name
-		String name = user.getName();
-		name = name.replaceAll("\\s+", "");
-		name = name.toLowerCase();
+		// Camel case the user's first name
+		String name = formatName(user.getName());
 
 		return String.format(PATTERN, opening, closing, name);
+	}
+
+	/**
+	 * @param name
+	 * The name to format
+	 * @return The first name in the given name, with the first letter
+	 * capitalized
+	 */
+	private static String formatName(String name) {
+		// Take the first non-empty token
+		String firstName = name.replaceAll("\\s", "");
+		for(String token : name.split("\\s")) {
+			if(token.length() > 0) {
+				firstName = token;
+				break;
+			}
+		}
+
+		// Uppercase only the first letter
+		StringBuilder builder = new StringBuilder();
+		for(int i = 0; i < firstName.length(); i++) {
+			char c = firstName.charAt(i);
+			builder.append(i == 0 ? Character.toUpperCase(c) : c);
+		}
+
+		return builder.toString();
 	}
 }
