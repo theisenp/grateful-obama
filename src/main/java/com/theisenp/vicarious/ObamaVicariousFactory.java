@@ -15,6 +15,7 @@ import com.theisenp.vicarious.modifier.TweetModifier;
 import com.theisenp.vicarious.provider.BaseTweetProvider;
 import com.theisenp.vicarious.provider.FileIntervalTweetFetcher;
 import com.theisenp.vicarious.provider.QueryTweetFetcher;
+import com.theisenp.vicarious.provider.ThrottledTweetProvider;
 import com.theisenp.vicarious.provider.TweetFetcher;
 import com.theisenp.vicarious.provider.TweetProvider;
 import com.theisenp.vicarious.publisher.BlockingTweetPublisher;
@@ -47,7 +48,8 @@ public class ObamaVicariousFactory implements VicariousFactory {
 		// Create the provider
 		QueryTweetFetcher queryFetcher = new QueryTweetFetcher(QUERY);
 		TweetFetcher fetcher = new FileIntervalTweetFetcher(file, queryFetcher);
-		provider = new BaseTweetProvider(twitter, fetcher);
+		TweetProvider rawProvider = new BaseTweetProvider(twitter, fetcher);
+		provider = new ThrottledTweetProvider(rawProvider, 5);
 
 		// Create the modifier
 		modifier = new ObamaTweetModifier();
