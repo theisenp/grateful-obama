@@ -1,9 +1,41 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
+	
 	<groupId>com.theisenp.vicarious</groupId>
 	<artifactId>grateful-obama</artifactId>
 	<version>1.0.0</version>
+	<packaging>jar</packaging>
+	
+	<name>grateful-obama</name>
+	<description>A twitter bot built with the Vicarious framework</description>
+	<url>https://github.com/theisenp/grateful-obama</url>
+	<inceptionYear>2014</inceptionYear>
+	<licenses>
+		<license>
+			<name>Apache 2.0</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+		</license>
+	</licenses>
+	
+	<developers>
+		<developer>
+			<name>Patrick Theisen</name>
+			<email>theisenp@gmail.com</email>
+		</developer>
+	</developers>
+	
+	<scm>
+		<connection>scm:git:git@github.com:theisenp/grateful-obama.git</connection>
+		<developerConnection>scm:git:git@github.com:thiesenp/grateful-obama.git</developerConnection>
+		<url>https://github.com/theisenp/grateful-obama</url>
+		<tag>HEAD</tag>
+	</scm>
+	
+	<issueManagement>
+		<system>GitHub Issues</system>
+		<url>https://github.com/theisenp/grateful-obama/issues</url>
+	</issueManagement>
 
 	<properties>
 		<jdk.version>1.6</jdk.version>
