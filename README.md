@@ -1,6 +1,8 @@
 GratefulObama
 =============
 
+[![Build Status](https://travis-ci.org/theisenp/grateful-obama.png?branch=master)](https://travis-ci.org/theisenp/grateful-obama)
+
 A [Vicarious][1] client that searches for tweets tagged with #ThanksObama and responds to them graciously as [@GratefulObama][2].
 
 Usage
