@@ -49,7 +49,7 @@ public class ObamaVicariousFactory implements VicariousFactory {
 		QueryTweetFetcher queryFetcher = new QueryTweetFetcher(QUERY);
 		TweetFetcher fetcher = new FileIntervalTweetFetcher(file, queryFetcher);
 		TweetProvider rawProvider = new BaseTweetProvider(twitter, fetcher);
-		provider = new ThrottledTweetProvider(rawProvider, 5);
+		provider = new ThrottledTweetProvider(rawProvider, 1);
 
 		// Create the modifier
 		modifier = new ObamaTweetModifier();
